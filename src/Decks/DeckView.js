@@ -3,28 +3,30 @@ import { useParams } from "react-router-dom";
 import { readDeck } from "../utils/api/index";
 
 import DeckButtons from "./DeckButtons";
+import CardList from "../Cards/CardList";
 
 function DeckView() {
   const { deckId } = useParams();
   const [flashDeck, setFlashDeck] = useState([]);
-  const { id, name, description } = flashDeck;
+  const { id, name, description, cards } = flashDeck;
 
   useEffect(() => {
-    async function getFLashDeck(deckId) {
+    async function getFLashDeck() {
       const flashDeckFromAPI = await readDeck(deckId);
       console.log(`getting deck ${deckId}`, flashDeckFromAPI);
       setFlashDeck(flashDeckFromAPI);
     }
-    getFLashDeck(deckId);
-  }, [setFlashDeck]);
+    getFLashDeck();
+  }, [deckId]);
 
   return (
-    <div className="card" key={id}>
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
-        <p className="card-text">{description}</p>
+    <div>
+      <div className="mb-4" key={id}>
+        <h5>{name}</h5>
+        <p>{description}</p>
         <DeckButtons id={id} />
       </div>
+      <CardList cards={cards}/>
     </div>
   );
 }
