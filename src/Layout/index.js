@@ -5,7 +5,7 @@ import { listDecks } from "../utils/api/index";
 
 import Header from "./Header";
 import NotFound from "./NotFound";
-import Deck from "../Decks/Deck";
+import DeckView from "../Decks/DeckView";
 import Decks from "../Decks/Decks";
 import CardList from "../Cards/CardList";
 
@@ -30,7 +30,7 @@ function Layout() {
           <Decks decks={flashDecks} />
         </Route>
         <Route path="/decks/:deckId">
-          <Deck />
+          <DeckView />
           <CardList />
         </Route>
         <Route>
