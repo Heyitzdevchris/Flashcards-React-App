@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api/index";
 
 import DeckButtons from "./DeckButtons";
@@ -21,6 +21,16 @@ function DeckView() {
 
   return (
     <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <Link to="/">Home</Link>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {name}
+          </li>
+        </ol>
+      </nav>
       <div className="mb-4" key={id}>
         <h5>{name}</h5>
         <p>{description}</p>
