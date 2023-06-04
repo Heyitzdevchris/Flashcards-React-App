@@ -1,8 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import DeckOptions from "./DeckOptions";
 
 function Deck({id, name, description}) {
+  const { deckId } = useParams();
+  //TODO if deckId in params, make API fetch for that deck
+  
   return (
     <div className="card" key={id}>
      <div className="card-body">
