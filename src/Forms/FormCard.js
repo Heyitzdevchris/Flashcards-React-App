@@ -4,13 +4,6 @@ import { useParams, Link } from "react-router-dom";
 function FormCard() {
     const { cardId, deckId } = useParams();
 
-    const placeHolder = (
-        <p>
-            Edit Card with id {cardId} in deck {deckId}
-        </p>
-    );
-    //TODO replace with actual name of deck in breadcrumb path
-
     const breadcrumb = (
      <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -30,7 +23,6 @@ function FormCard() {
     return (
      <div>
         {breadcrumb}
-        {placeHolder}
      </div>
     );
     
