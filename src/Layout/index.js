@@ -33,7 +33,7 @@ function Layout() {
         <Route path="/decks/:deckId/cards/:cardId/edit">
           <FormCard />
         </Route>
-        <Route path="/decks/:deckId/edit">
+        <Route path={["/decks/:deckId/edit", "/decks/new"]}>
           <FormDeck />
         </Route>
         <Route path="/decks/:deckId">
