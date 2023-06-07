@@ -16,7 +16,7 @@ function Layout() {
   useEffect(() => {
     async function getFlashDecks() {
       const flashDecksFromAPI = await listDecks();
-      console.log("gettingDecks", flashDecksFromAPI);
+      console.log("LayoutIndex gettingDecks", flashDecksFromAPI);
       setFlashDecks(flashDecksFromAPI);
     }
     getFlashDecks();

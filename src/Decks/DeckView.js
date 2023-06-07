@@ -13,7 +13,7 @@ function DeckView() {
   useEffect(() => {
     async function getFLashDeck() {
       const flashDeckFromAPI = await readDeck(deckId);
-      console.log(`getting deck ${deckId}`, flashDeckFromAPI);
+      console.log(`DeckView getting deck ${deckId}`, flashDeckFromAPI);
       setFlashDeck(flashDeckFromAPI);
     }
     getFLashDeck();
