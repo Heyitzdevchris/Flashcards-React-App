@@ -2,8 +2,7 @@ import React, { useState }from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 
 function FormDeck() {
-
-    const { deckId } = useParams();
+    let { deckId } = useParams();
     const history = useHistory();
   
     //* determines if form should be in New or Edit mode
@@ -27,10 +26,11 @@ function FormDeck() {
         console.log("Submitted", formData);
         setFormData({ ...initialFormState });
     //todo run api set
-    //todo push deckId into useHistory
+    //todo if !editForm then deckId = returned value from api
+    editForm ? history.goBack() : history.push(`/decks/${deckId}`);
     };
 
-      //TODO replace with actual name of deck in breadcrumb path
+    //TODO replace with actual name of deck in breadcrumb path after api readDeck
     let deckIdCrumb = null;
         if (editForm) {
         deckIdCrumb = (
