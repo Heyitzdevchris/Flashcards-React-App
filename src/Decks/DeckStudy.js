@@ -45,9 +45,9 @@ function DeckStudy({ deck }) {
   };
 
   const { cards, name, id } = deck;
-  const totalCards = cards.length;
+  const totalCards = cards?.length;
 
-  const flashCards = cards.map((card) => {
+  const flashCards = cards?.map((card) => {
     //todo add flashCards to hook so map doesn't run on every component render
     return (
       <CardStudy
@@ -64,30 +64,32 @@ function DeckStudy({ deck }) {
   });
 
   let displayResult = null;
-  const notEnoughCards = <CardNotEnough total={totalCards} deckId={id} />;
-  const enoughCards = flashCards[cardNumber - 1];
+  if (deck.length) {
+    const notEnoughCards = <CardNotEnough total={totalCards} deckId={id} />;
+    const enoughCards = flashCards[cardNumber - 1];
 
-  displayResult = totalCards <= 2 ? notEnoughCards : enoughCards;
+    displayResult = totalCards <= 2 ? notEnoughCards : enoughCards;
 
-  displayCard = (
-    <div>
-     <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <a href="/">Home</a>
-          </li>
-          <li className="breadcrumb-item">
-            <Link to={`/decks/${id}`}>{name}</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Study
-          </li>
-        </ol>
-    </nav>
-    <h1>{name}</h1>
-    {displayResult}
-    </div>
-  );
+    displayCard = (
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to={`/decks/${id}`}>{name}</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Study
+            </li>
+          </ol>
+        </nav>
+        <h1>{name}</h1>
+        {displayResult}
+      </div>
+    );
+  }
 
   return displayCard;
 }
