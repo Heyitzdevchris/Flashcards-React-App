@@ -36,9 +36,6 @@ function DeckButtons({ id, handleDelete }) {
       <div className="btn-group" role="group" aria-label="View Study Edit group">
         {buttonView}
         {buttonEdit}
-        <button type="button" className="btn btn-primary">
-          Study
-        </button>
         <Link to={`/decks/${id}/study`}>
           <button type="button" className="btn btn-primary">
             Study
