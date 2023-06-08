@@ -8,11 +8,17 @@
     {
       "id": 2,
       "name": "React Routers",
-      "description": "React Router is a collection of navigational components that compose declaratively with your application."},
-      {
-        "name": "Chris Ibarra",
-        "description": "gibberish",
-        "id": 3
+      "description": "React Router is a collection of navigational components that compose declaratively with your application."
+    },
+    {
+      "name": "Chris Ibarra",
+      "description": "gibberish",
+      "id": 3
+    },
+    {
+      "name": "Not Enough Cards",
+      "description": "0 cards dude ",
+      "id": 4
     }
   ],
   "cards": [
