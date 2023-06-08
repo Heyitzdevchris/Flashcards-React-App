@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 import { deleteDeck } from "../utils/api/index";
+import { listDecks } from "../utils/api/index";
 
 import Deck from "./Deck";
 import DeckView from "./DeckView";
 import FormDeck from "../Forms/FormDeck";
 import NotFound from "../Layout/NotFound";
 
-function Decks({ decks, setFlashDecks}) {
+function Decks() {
   const history = useHistory();
+
+  const [flashDecks, setFlashDecks] = useState([]);
+
+  useEffect(() => {
+    async function getFlashDecks() {
+      const flashDecksFromApi = await listDecks();
+      /**
+       * ! */ console.log("Decks.js listDecks() API fetch", flashDecksFromApi);
+      setFlashDecks(flashDecksFromApi);
+    }
+    getFlashDecks();
+  }, [setFlashDecks]);
 
   const handleDelete = (id) => {
     if (window.confirm("Do you really want to delete this deck?")) {
@@ -22,7 +35,7 @@ function Decks({ decks, setFlashDecks}) {
     }
   };
 
-  const deckList = decks.map((deck) => {
+  const deckList = flashDecks.map((deck) => {
     return (
       <Deck
         key={deck.id}
@@ -35,7 +48,7 @@ function Decks({ decks, setFlashDecks}) {
     );
   });
 
-  function DisplayDecks({ decks }) {
+  function DisplayDecks({ flashDecks }) {
     return (
       <div>
         <Link to="/decks/new">
@@ -44,7 +57,7 @@ function Decks({ decks, setFlashDecks}) {
           </button>
         </Link>
         {/* <div className="card-deck"> */}
-        {decks}
+        {flashDecks}
         {/* </div> */}
       </div>
     );
@@ -54,7 +67,7 @@ function Decks({ decks, setFlashDecks}) {
     <div className="container">
       <Switch>
         <Route exact={true} path="/">
-          <DisplayDecks decks={deckList} />
+          <DisplayDecks flashDecks={deckList} />
         </Route>
 
         <Route path="/decks/new">

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Switch, Route, } from "react-router-dom";
-
-import { listDecks } from "../utils/api/index";
 
 import Header from "./Header";
 import NotFound from "./NotFound";
@@ -9,17 +7,6 @@ import Decks from "../Decks/Decks";
 
 
 function Layout() {
-  const [flashDecks, setFlashDecks] = useState([]);
-
-  useEffect(() => {
-    async function getFlashDecks() {
-      const flashDecksFromAPI = await listDecks();
-/**
-* ! */console.log("LayoutIndex gettingDecks", flashDecksFromAPI);
-      setFlashDecks(flashDecksFromAPI);
-    }
-    getFlashDecks();
-  }, [setFlashDecks]);
 
   return (
     <div>
@@ -27,7 +14,7 @@ function Layout() {
       <div className="container">
         <Switch>
          <Route path="/">
-           <Decks decks={flashDecks} setFlashDecks={setFlashDecks} />
+           <Decks />
          </Route>
          <Route>
           <NotFound />
