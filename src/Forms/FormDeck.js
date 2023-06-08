@@ -1,31 +1,28 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { updateDeck } from "../utils/api/index";
+import { updateDeck, createDeck } from "../utils/api/index";
 
-function FormDeck({ edit, deck, setFlashDeck }) {
+function FormDeck({ edit = false, deck, setFlashDeck }) {
   //* edit is a boolean. false means create new
-  const { id, name, description } = deck;
+  // console.log("edit?", edit);
+
   const history = useHistory();
 
   let initialFormState = null;
 
-  if (id) {
+  if (edit) {
     initialFormState = {
-      id: id,
-      name: name,
-      ogName: name,
-      description: description,
+      id: deck.id,
+      name: deck.name,
+      ogName: deck.name,
+      description: deck.description,
     };
   } else {
     initialFormState = {
-      id: "",
       name: "",
-      ogName: "",
       description: "",
     };
   }
-
-  console.log("initialFormState", initialFormState);
 
   const [formData, setFormData] = useState(initialFormState);
 
@@ -39,24 +36,38 @@ function FormDeck({ edit, deck, setFlashDeck }) {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log("Submitted:", formData);
-    await updateDeck({
-      id: formData.id,
-      name: formData.name,
-      description: formData.description,
-    });
-    await setFlashDeck({
-      id: formData.id,
-      name: formData.name,
-      description: formData.description,
-    });
-    history.goBack();
+    if (edit) {
+      await updateDeck({
+        ...deck,
+        id: formData.id,
+        name: formData.name,
+        description: formData.description,
+      });
+      await setFlashDeck({
+        ...deck,
+        id: formData.id,
+        name: formData.name,
+        description: formData.description,
+      });
+      history.goBack();
+    } 
+    else {
+      const response = await createDeck({
+        name: formData.name,
+        description: formData.description,
+      });
+
+      const newDeck = await response;
+      console.log("Created newDeck!", newDeck);
+      history.push(`/decks/${newDeck.id}`);
+    }
   }
 
   let deckIdCrumb = null;
   if (edit) {
     deckIdCrumb = (
       <li className="breadcrumb-item">
-        <Link to={`/decks/${id}`}>{formData.ogName}</Link>
+        <Link to={`/decks/${deck.id}`}>{formData.ogName}</Link>
       </li>
     );
   }

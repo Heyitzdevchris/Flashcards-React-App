@@ -7,7 +7,6 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import Decks from "../Decks/Decks";
 //import FormCard from "../Forms/FormCard";
-//import FormDeck from "../Forms/FormDeck";
 
 function Layout() {
   const [flashDecks, setFlashDecks] = useState([]);
@@ -25,17 +24,17 @@ function Layout() {
     <>
       <Header />
       <div className="container">
-      <Switch>
-        <Route path="/">
-          <Decks decks={flashDecks} />
-        </Route>
-        {/* <Route path="/decks/:deckId/cards/:cardId/edit">
+        <Switch>
+         <Route path="/">
+           <Decks decks={flashDecks} />
+         </Route>
+         {/* <Route path="/decks/:deckId/cards/:cardId/edit">
           <FormCard />
-        </Route> */}
-        <Route>
+         </Route> */}
+         <Route>
           <NotFound />
-        </Route>
-      </Switch>
+         </Route>
+       </Switch>
       </div>
     </>
   );
