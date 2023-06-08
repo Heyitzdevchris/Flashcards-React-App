@@ -18,7 +18,8 @@ function DeckView({ handleDelete }) {
 
     async function getFlashDeck() {
       const flashDeckFromApi = await readDeck(deckId);
-      console.log(`DeckView getting deck ${deckId}`, flashDeckFromApi);
+/**
+ * ! */console.log(`DeckView getting deck ${deckId}`, flashDeckFromApi);
       setFlashDeck(flashDeckFromApi);
     }
 
