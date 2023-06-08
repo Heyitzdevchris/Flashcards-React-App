@@ -7,7 +7,7 @@ import Decks from "../Decks/Decks";
 
 
 function Layout() {
-
+  console.log("Layout.js level 1 ran")
   return (
     <div>
       <Header />

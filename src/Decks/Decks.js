@@ -12,6 +12,8 @@ function Decks() {
   const { deckId } = useParams();
   const history = useHistory();
 
+  console.log("Decks.js level 2 ran");
+
   const [flashDecks, setFlashDecks] = useState([]);
 
   useEffect(() => {
