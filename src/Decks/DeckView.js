@@ -3,8 +3,9 @@ import { useParams, Route, Switch } from "react-router-dom";
 import { readDeck } from "../utils/api/index";
 
 import DeckButtons from "./DeckButtons";
-import CardList from "../Cards/CardList";
+import DeckStudy from "./DeckStudy";
 import FormDeck from "../Forms/FormDeck";
+import CardList from "../Cards/CardList";
 import NotFound from "../Layout/NotFound";
 
 function DeckView({ handleDelete }) {
@@ -77,6 +78,9 @@ function DeckView({ handleDelete }) {
       <Switch>
         <Route path="/decks/:deckId/edit">
           <FormDeck edit={true} deck={flashDeck} setFlashDeck={setFlashDeck} />
+        </Route>
+        <Route path="/decks/:deckId/study">
+          <DeckStudy deck={flashDeck} />
         </Route>
         <Route path="/decks/:deckId">
           <DisplayDeckView cards={cards} />

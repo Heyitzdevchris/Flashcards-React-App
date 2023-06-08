@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 function DeckButtons({ id, handleDelete }) {
   const { deckId } = useParams();
-  
+
   let buttonView = null;
   let buttonEdit = null;
   let buttonAddCards = null;
@@ -33,12 +33,17 @@ function DeckButtons({ id, handleDelete }) {
 
   return (
     <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Deck Buttons">
-      <div className="btn-group" role="group" aria-label="View/Study group">
+      <div className="btn-group" role="group" aria-label="View Study Edit group">
         {buttonView}
         {buttonEdit}
         <button type="button" className="btn btn-primary">
           Study
         </button>
+        <Link to={`/decks/${id}/study`}>
+          <button type="button" className="btn btn-primary">
+            Study
+          </button>
+        </Link>
         {buttonAddCards}
       </div>
       <div className="btn-group" role="group" aria-label="Delete group">
