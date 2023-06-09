@@ -83,7 +83,7 @@ function DeckStudy() {
 
   const totalCards = flashDeck?.cards?.length;
 
-  const flashCards = flashDeck?.map((card) => {
+  const flashCards = flashDeck?.cards?.map((card) => {
     //todo add flashCards to hook so map doesn't run on every component render
     return (
       <CardStudy
