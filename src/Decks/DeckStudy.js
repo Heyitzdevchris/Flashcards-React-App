@@ -6,44 +6,20 @@ import CardStudy from "../Cards/CardStudy";
 import CardNotEnough from "../Cards/CardNotEnough";
 
 function DeckStudy() {
-  
+  // console.log("DeckStudy ran");
   const history = useHistory();
   const { deckId } = useParams();
 
-  console.log("DeckStudy level 4 ran");
-
   const [flashDeck, setFlashDeck] = useState();
-  // const { id, name, cards } = flashDeck;
 
   useEffect(() => {
     async function getCardsAndDeck() {
       const deckFromApi = await readDeck(deckId);
-      console.log(`DeckStudy readDeck(${deckId}) ran`);
+      //console.log(`DeckStudy readDeck(${deckId}) ran`);
       setFlashDeck(deckFromApi);
     }
     getCardsAndDeck();
   }, [deckId]);
-
-  /*     useEffect(() => {
-    const abortController = new AbortController();
-    async function getFlashDeck() {
-      try {
-        const flashDeckFromApi = await readDeck(deckId);
-        console.log(
-          `DeckStudy / abort getting deck ${deckId}`,
-          flashDeckFromApi
-        );
-        setFlashDeck(flashDeckFromApi);
-      } catch (error) {
-        if (error.name === "AbortError") {
-          // Ignore `AbortError`
-          console.log("Aborted", deckId);
-        }
-      }
-    }
-    getFlashDeck();
-    return () => abortController.abort();
-  }, [deckId]); */
 
   const initialFlashCardState = {
     cardNumber: 1,
@@ -84,7 +60,6 @@ function DeckStudy() {
   const totalCards = flashDeck?.cards?.length;
 
   const flashCards = flashDeck?.cards?.map((card) => {
-    //todo add flashCards to hook so map doesn't run on every component render
     return (
       <CardStudy
         cardNumber={cardNumber}
@@ -100,7 +75,7 @@ function DeckStudy() {
   });
 
   if (!flashDeck) {
-    console.log("no flashDeck Loading... ran");
+    //console.log("no flashDeck Loading... ran");
     return <p>Loading...</p>;
   }
 

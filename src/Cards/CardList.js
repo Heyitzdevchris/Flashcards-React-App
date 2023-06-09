@@ -3,7 +3,6 @@ import React from "react";
 import CardButtons from "./CardButtons";
 
 function CardList({ cards, handleDelete }) {
-  // const { deckId } = useParams();
   let displayCards = "loading...";
 
   if (cards) {

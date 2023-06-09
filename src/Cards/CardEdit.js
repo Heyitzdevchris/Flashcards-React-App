@@ -5,7 +5,7 @@ import { updateCard, readCard, readDeck } from "../utils/api/index";
 import FormCard from "../Forms/FormCard";
 
 function CardEdit() {
-  console.log("CardEdit ran");
+  //console.log("CardEdit ran");
 
   const history = useHistory();
   const { deckId, cardId } = useParams();
@@ -29,14 +29,14 @@ function CardEdit() {
   useEffect(() => {
     async function getFlashDeck() {
       try {
-        console.log(`API readDeck(${deckId}) ran`);
+        //console.log(`API readDeck(${deckId}) ran`);
         const deckFromApi = await readDeck(deckId);
-        console.log("deckFromApi", deckFromApi);
+        //console.log("deckFromApi", deckFromApi);
         setFlashDeck(deckFromApi);
 
-        console.log(`API readCard(${cardId})  ran`);
+        //console.log(`API readCard(${cardId})  ran`);
         const cardFromApi = await readCard(cardId);
-        console.log("cardFromApi", cardFromApi);
+        //console.log("cardFromApi", cardFromApi);
         setFlashCard(cardFromApi);
       } catch (error) {
         throw new Error(`API readDeck(${deckId}) had an error: ${error}`);
@@ -54,7 +54,7 @@ function CardEdit() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("FormCard(edit) Submitted:", flashCard);
+    //console.log("FormCard(edit) Submitted:", flashCard);
     await updateCard({
       ...flashCard,
       front: flashCard.front,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, Link, useHistory, useParams } from "react-router-dom";
-import { deleteDeck } from "../utils/api/index";
-import { listDecks } from "../utils/api/index";
+import { deleteDeck, listDecks } from "../utils/api/index";
 
 import Deck from "./Deck";
 import DeckStudy from "./DeckStudy";
@@ -15,13 +14,14 @@ import NotFound from "../Layout/NotFound";
 function Decks() {
   const { deckId } = useParams();
   const history = useHistory();
+  // console.log("Decks.js ran");
 
   const [flashDecks, setFlashDecks] = useState([]);
 
   useEffect(() => {
     async function getFlashDecks() {
       const flashDecksFromApi = await listDecks();
-      console.log("Decks.js listDecks() API fetch", flashDecksFromApi);
+      //console.log("Decks.js listDecks() API fetch", flashDecksFromApi);
       setFlashDecks(flashDecksFromApi);
     }
     getFlashDecks();

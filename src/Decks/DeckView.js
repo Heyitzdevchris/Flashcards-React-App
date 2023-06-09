@@ -7,10 +7,9 @@ import CardList from "../Cards/CardList";
 
 
 function DeckView({ handleDelete }) {
+  // console.log("DeckView ran");
   const { deckId } = useParams();
   const history = useHistory();
-
-  console.log("DeckView level 3 ran");
 
   const [flashDeck, setFlashDeck] = useState({});
   const { id, name, description, cards } = flashDeck;
@@ -19,13 +18,9 @@ function DeckView({ handleDelete }) {
     console.log("flashDeck useEffect start:");
 
     async function getFlashDeck() {
-      console.log("flashDeck useEffect async before fetch:");
-
       const flashDeckFromApi = await readDeck(deckId);
-      
-      console.log(`DeckView getting deck ${deckId}`, flashDeckFromApi);
+      //console.log(`DeckView getting deck ${deckId}`, flashDeckFromApi);
       setFlashDeck(flashDeckFromApi);
-      console.log("getFlashDeck() in useEffect ran");
     }
 
     getFlashDeck();
@@ -34,36 +29,10 @@ function DeckView({ handleDelete }) {
 
   const handleCardDelete = async (id) => {
     if (window.confirm("Do you really want to delete this card?")) {
-      const response = await deleteCard(id);
-      if (response) {
-        history.go(0);
-      }
+      await deleteCard(id);
+      history.go(0);
     }
   };
-
-  /*   useEffect(() => {
-    setFlashDeck({});
-    const abortController = new AbortController();
-    async function getFlashDeck() {
-      try {
-        const flashDeckFromApi = await readDeck(deckId);
-        console.log(
-          `DeckView w/ abort getting deck ${deckId}`,
-          flashDeckFromApi
-        );
-        setFlashDeck(flashDeckFromApi);
-      } catch (error) {
-        if (error.name === "AbortError") {
-          // Ignore `AbortError`
-          console.log("Aborted", deckId);
-        } else {
-          throw error;
-        }
-      }
-    }
-    getFlashDeck();
-    return () => abortController.abort();
-  }, [deckId]); */
 
     return (
       <div>
@@ -83,7 +52,7 @@ function DeckView({ handleDelete }) {
           <p>{description}</p>
           <DeckButtons id={id} handleDelete={handleDelete} />
         </div>
-        <CardList cards={cards} handleDelete={handleDelete}/>
+        <CardList cards={cards} handleDelete={handleCardDelete}/>
        </div>
       </div>
   );

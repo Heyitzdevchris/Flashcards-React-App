@@ -5,7 +5,7 @@ import { createCard, readDeck } from "../utils/api/index";
 import FormCard from "../Forms/FormCard";
 
 function CardNew() {
-  console.log("CardNew");
+  //console.log("CardNew");
 
   const { deckId } = useParams();
 
@@ -25,9 +25,9 @@ function CardNew() {
   useEffect(() => {
     async function getFlashDeck() {
       try {
-        console.log(`API readDeck(${deckId}) ran`);
+        //console.log(`API readDeck(${deckId}) ran`);
         const deckFromApi = await readDeck(deckId);
-        console.log("deckFromApi", deckFromApi);
+        //console.log("deckFromApi", deckFromApi);
         setFlashDeck(deckFromApi);
       } catch (error) {
         throw new Error(`API readDeck(${deckId}) had an error: ${error}`);
@@ -47,11 +47,11 @@ function CardNew() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("FormCard(new) Submitted:", newCard);
+    //console.log("FormCard(new) Submitted:", newCard);
     await createCard(deckId, newCard);
-    console.log("Created newCard!", newCard);
+    //console.log("Created newCard!", newCard);
     setNewCard(formReset);
-    // history.push(`/decks/${deckId}`);
+    // history.go(0);
   }
 
   // for breadcrumb path
