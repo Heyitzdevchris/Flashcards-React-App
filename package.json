@@ -1,6 +1,5 @@
 {
   "name": "project-flashcards",
-  "homepage": "http://heyitzdevchris.github.io/Flashcards-React-App",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
